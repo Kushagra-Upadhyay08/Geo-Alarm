@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geo Alarm | Sequential Flow</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Full Screen Map -->
+  <div id="map"></div>
+
+  <!-- Left Aligned Control Panel -->
+  <main class="ui-panel" id="app-panel">
+
+    <!-- Coordinate Card -->
+    <div class="card location-card">
+      <h2 class="card-title" style="margin-bottom: 8px;">YOUR LOCATION</h2>
+      <div class="coords-box" style="margin-bottom: 20px;">
+        <div class="coord-item">
+          <span class="coord-label">Lat:</span>
+          <span id="user-lat-val" class="coord-value">--.------</span>
+        </div>
+        <div class="coord-item">
+          <span class="coord-label">Lng:</span>
+          <span id="user-lng-val" class="coord-value">--.------</span>
+        </div>
+      </div>
+
+      <h2 class="card-title">SELECTED LOCATION</h2>
+
+      <div class="coords-box">
+        <div class="coord-item">
+          <span class="coord-label">Lat:</span>
+          <span id="lat-val" class="coord-value">--.------</span>
+        </div>
+        <div class="coord-item">
+          <span class="coord-label">Lng:</span>
+          <span id="lng-val" class="coord-value">--.------</span>
+        </div>
+      </div>
+
+      <!-- Proximity Row (Hidden until set) -->
+      <div id="proximity-row" class="status-row hidden">
+        <div class="status-pill-group">
+          <div id="proximity-pill" class="status-pill out">OUT OF RANGE</div>
+          <button id="stop-alarm-btn" class="stop-btn" title="Turn Off Alarm">⏻ OFF</button>
+        </div>
+        <div class="distance-text">Distance: <span id="dist-val">0</span>m</div>
+      </div>
+
+      <!-- Setting Row (Radius) -->
+      <div id="radius-container" class="radius-row">
+        <label for="radius-slider">Radius: <span id="radius-display">1000m</span></label>
+        <input type="range" id="radius-slider" min="50" max="5000" value="1000" step="50" class="minimal-slider">
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="button-stack">
+        <button id="set-location-btn" class="btn btn-solid">Confirm & Set Location</button>
+        <button id="edit-location-btn" class="btn btn-outline hidden">Edit Location</button>
+
+        <button id="find-my-location-btn" class="btn btn-ghost">
+          <span class="icon">📍</span> Find My Location
+        </button>
+      </div>
+    </div>
+
+    <!-- Utilities (Sound) -->
+    <div class="card mini-card">
+      <button id="upload-trigger" class="btn btn-ghost">🎵 Change Alarm Sound</button>
+      <input type="file" id="audio-input" accept="audio/*" hidden>
+    </div>
+  </main>
+
+  <!-- Audio Agent -->
+  <audio id="alarm-audio" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
+    preload="auto"></audio>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
